@@ -1,0 +1,23 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class="row">
+	<div class="col-sm-4">
+		<img src="{{ book.image.url }}" alt="{{ book.name }}" style="height: 200px; width: auto; margin: auto;">
+	</div>
+	<div class="col-sm-8">
+		<h1>{{ book.name }}</h1>
+		<p><strong>Author:</strong> <a href="">{{ book.get_authors }}</a></p>
+		<!-- author detail link not yet defined -->
+		<p><strong>Price:</strong> {{book.get_price}}</p>
+		<p><strong>Description:</strong> {{ book.description }}</p>
+		<p><strong>Language:</strong> {{ book.language }}</p>
+		<form action="{% url 'add-to-cart' %}" method="post">
+			{% csrf_token %}
+			<input type="hidden" value="{{ book.pk }}" name="pk">
+
+			<button class="btn btn-primary">Buy</button>
+		</form>
+	</div>
+</div>
+{% endblock %}

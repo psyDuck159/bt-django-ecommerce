@@ -1,0 +1,23 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <div class="row">
+		<div class="col-sm-4">
+			<img src="{{ shoe.image.url }}" alt="{{ shoe.name }}"
+            style="height: 200px; width: auto; margin: auto;">
+		</div>
+		<div class="col-sm-8">
+			<h1>{{ shoe.name }}</h1>
+			<p><strong>Price:</strong> {{shoe.get_price}}</p>
+            <p><strong>Color:</strong> {{shoe.color}} </p>
+            <p><strong>Size:</strong> {{shoe.size}} </p>
+			<p><strong>Description:</strong> {{ shoe.description }}</p>
+			<form action="{% url 'add-to-cart' %}" method="post">
+				{% csrf_token %}
+				<input type="hidden" value="{{ shoe.pk }}" name="pk">
+
+				<button class="btn btn-primary">Buy</button>
+			</form>
+		</div>
+  </div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <div class="row">
+		<div class="col-sm-4">
+			<img src="{{ cloth.image.url }}" alt="{{ cloth.name }}"
+            style="height: 200px; width: auto; margin: auto;">
+		</div>
+		<div class="col-sm-8">
+			<h1>{{ cloth.name }}</h1>
+			<p><strong>Price:</strong> {{cloth.get_price}}</p>
+            <p><strong>Color:</strong> {{cloth.color}} </p>
+            <p><strong>Size:</strong> {{cloth.get_size_display}} </p>
+			<p><strong>Description:</strong> {{ cloth.description }}</p>
+			<form action="{% url 'add-to-cart' %}" method="post">
+				{% csrf_token %}
+				<input type="hidden" value="{{ cloth.pk }}" name="pk">
+
+				<button class="btn btn-primary">Buy</button>
+			</form>
+		</div>
+  </div>
+{% endblock %}

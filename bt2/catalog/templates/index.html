@@ -1,0 +1,124 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h3>Books</h3>
+<div class="row">
+	{% for book in books %}
+	<div class="col-4 col-sm-3">
+		<div class="card" style="margin-bottom: 16px;">
+			<a style="margin: auto;" href="{{ book.get_absolute_url }}">
+				<img src="{{book.image.url}}" class="card-img-top" alt="{{book.name}}"
+					style="height: 200px; width: auto; margin: auto;">
+			</a>
+			<div class="card-body">
+				<h5 class="text card-title">{{book.name}}</h5>
+				<p class="card-text">{{book.get_price}}</p>
+				<form action="{% url 'add-to-cart' %}" method="post">
+					{% csrf_token %}
+					<input type="hidden" value="{{ book.pk }}" name="pk">
+
+					<button class="btn btn-primary">Buy</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	{% endfor %}
+</div>
+
+<h3>Laptops</h3>
+<div class="row">
+	{% for laptop in laptops %}
+	<div class="col-4 col-sm-3">
+		<div class="card" style="margin-bottom: 16px;">
+			<a style="margin: auto;" href="{{ laptop.get_absolute_url }}">
+				<img src="{{laptop.image.url}}" class="card-img-top" alt="{{laptop.name}}"
+					style="height: 200px; width: auto; margin: auto;">
+			</a>
+			<div class="card-body">
+				<h5 class="text card-title">{{laptop.name}}</h5>
+				<p class="card-text">{{laptop.get_price}}</p>
+				<form action="{% url 'add-to-cart' %}" method="post">
+					{% csrf_token %}
+					<input type="hidden" value="{{ laptop.pk }}" name="pk">
+
+					<button class="btn btn-primary">Buy</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	{% endfor %}
+</div>
+
+<h3>Mobiles</h3>
+<div class="row">
+	{% for mobile in mobiles %}
+	<div class="col-4 col-sm-3">
+		<div class="card" style="margin-bottom: 16px;">
+			<a style="margin: auto;" href="{{ mobile.get_absolute_url }}">
+				<img src="{{mobile.image.url}}" class="card-img-top" alt="{{mobile.name}}"
+					style="height: 200px; width: auto; margin: auto;">
+			</a>
+			<div class="card-body">
+				<h5 class="text card-title">{{mobile.name}}</h5>
+				<p class="card-text">{{mobile.get_price}}</p>
+				<form action="{% url 'add-to-cart' %}" method="post">
+					{% csrf_token %}
+					<input type="hidden" value="{{ mobile.pk }}" name="pk">
+
+					<button class="btn btn-primary">Buy</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	{% endfor %}
+</div>
+
+<h3>Clothes</h3>
+<div class="row">
+	{% for cloth in clothes %}
+	<div class="col-4 col-sm-3">
+		<div class="card" style="margin-bottom: 16px;">
+			<a style="margin: auto;" href="{{ cloth.get_absolute_url }}">
+				<img src="{{cloth.image.url}}" class="card-img-top" alt="{{cloth.name}}"
+					style="height: 200px; width: auto; margin: auto;">
+			</a>
+			<div class="card-body">
+				<h5 class="text card-title">{{cloth.name}}</h5>
+				<p class="card-text">{{cloth.get_price}}</p>
+				<form action="{% url 'add-to-cart' %}" method="post">
+					{% csrf_token %}
+					<input type="hidden" value="{{ cloth.pk }}" name="pk">
+
+					<button class="btn btn-primary">Buy</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	{% endfor %}
+</div>
+
+<h3>Shoes</h3>
+<div class="row">
+	{% for shoe in shoes %}
+	<div class="col-4 col-sm-3">
+		<div class="card" style="margin-bottom: 16px;">
+			<a style="margin: auto;" href="{{ shoe.get_absolute_url }}">
+				<img src="{{shoe.image.url}}" class="card-img-top" alt="{{shoe.name}}"
+					style="height: 200px; width: auto; margin: auto;">
+			</a>
+			<div class="card-body">
+				<h5 class="text card-title">{{shoe.name}}</h5>
+				<p class="card-text">{{shoe.get_price}}</p>
+				<form action="{% url 'add-to-cart' %}" method="post">
+					{% csrf_token %}
+					<input type="hidden" value="{{ shoe.pk }}" name="pk">
+
+					<button class="btn btn-primary">Buy</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	{% endfor %}
+</div>
+
+{% endblock %}

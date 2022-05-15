@@ -1,0 +1,47 @@
+{% extends 'base_generic.html' %}
+
+{% block content%}
+<div class="container-sm" style="width: 540px;">
+    <h1>Cart</h1>
+    {% if cart %}
+    <form action="{% url 'edit-cart' %}" method="post">
+        {% csrf_token %}
+        {% for item, quantity in cart.items %}
+        <div class="row" style="margin: 8px 0;">
+            <a class="col-3" href="#">
+                <img src="{{item.image.url}}" alt="{{item.name}}" style="height: 100px; width: auto; display: block; margin: auto;">
+            </a>
+            <div class="col-6">
+                <p> {{item.name}} </p>
+                <p> {{item.get_price}} </p>
+            </div>
+            <div class="col-3">
+                <label for="quantity">Số lượng</label>
+                <input type="hidden" name="item" value="{{item.pk}}">
+                <select name="{{item.pk}}" id="quantity">
+                    <option value="0">0</option>
+                    <option value="1" {% if quantity == 1 %} selected {% endif %}>1</option>
+                    <option value="2" {% if quantity == 2 %} selected {% endif %}>2</option>
+                    <option value="3" {% if quantity == 3 %} selected {% endif %}>3</option>
+                    <option value="4" {% if quantity == 4 %} selected {% endif %}>4</option>
+                    <option value="5" {% if quantity == 5 %} selected {% endif %}>5</option>
+                    <option value="6" {% if quantity == 6 %} selected {% endif %}>6</option>
+                    <option value="7" {% if quantity == 7 %} selected {% endif %}>7</option>
+                    <option value="8" {% if quantity == 8 %} selected {% endif %}>8</option>
+                    <option value="9" {% if quantity == 9 %} selected {% endif %}>9</option>
+                    <option value="10" {% if quantity == 10 %} selected {% endif %}>10</option>
+                </select>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="row" style="justify-content: right;">
+            <input class="btn btn-danger" type="submit" value="Delete All" formaction="{% url 'delete-cart' %}" style="margin: 0 8px;">
+            <input class="btn btn-warning" type="submit" value="Update" formaction="{% url 'edit-cart' %}" style="margin: 0 8px;">
+            <a href="{% url 'buy' %}" class="btn btn-primary" style="margin: 0 16px 0 8px;">Buy</a>
+        </div>
+    </form>
+    {% else%}
+        <p>Empty cart</p>
+    {% endif %}
+</div>
+{% endblock %}

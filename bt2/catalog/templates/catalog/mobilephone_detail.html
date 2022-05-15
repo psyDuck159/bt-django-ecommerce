@@ -1,0 +1,24 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <div class="row">
+		<div class="col-sm-4">
+			<img src="{{ mobilephone.image.url }}" alt="{{ mobilephone.name }}"
+            style="height: 200px; width: auto; margin: auto;">
+		</div>
+		<div class="col-sm-8">
+			<h1>{{ mobilephone.name }}</h1>
+			<p><strong>Price:</strong> {{mobilephone.get_price}}</p>
+            <p><strong>CPU:</strong> {{mobilephone.cpu}} </p>
+            <p><strong>RAM:</strong> {{mobilephone.get_ram_display}} </p>
+            <p><strong>Storage:</strong> {{mobilephone.get_storage_display}} </p>
+			<p><strong>Description:</strong> {{ mobilephone.description }}</p>
+			<form action="{% url 'add-to-cart' %}" method="post">
+				{% csrf_token %}
+				<input type="hidden" value="{{ mobilephone.pk }}" name="pk">
+
+				<button class="btn btn-primary">Buy</button>
+			</form>
+		</div>
+  </div>
+{% endblock %}

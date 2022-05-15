@@ -1,0 +1,63 @@
+{% extends 'base_generic.html' %}
+
+{% block content%}
+<div class="container-fluid">
+	<h1 style="margin-bottom: 16px;">Confirm order</h1>
+	{% if cart %}
+	<form class="row" action="{% url 'buy' %}" method="post">
+		{% csrf_token %}
+		<div class="col-sm-9">
+			<div class="container-fluid">
+				{% for item, quantity in cart.items %}
+				<div class="row" style="margin: 8px 0;">
+					<a class="col-3" href="#">
+						<img src="{{item.image.url}}" alt="{{item.name}}" style="height: 100px; width: auto; display: block; margin: auto;">
+					</a>
+					<div class="col-6">
+						<p> {{item.name}} </p>
+						<p> {{item.get_price}} </p>
+					</div>
+					<div class="col-3">
+						<label for="quantity">Số lượng</label>
+						<input type="hidden" name="item" value="{{item.pk}}">
+						<input type="hidden" name="{{item.pk}}" value="{{quantity}}" id="quantity">
+						<p> {{quantity}} </p>
+					</div>
+				</div>
+				{% endfor %}
+				<div class="row" style="margin: 8px 0; justify-content: right;">
+					<p class="col-3"><strong>Total:</strong> {{total}} </p>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-3">
+			<div class="row">
+				<div class="col">
+					<label for="name">Your name:</label>
+					<input type="text" name="name" id="name" style="width: 100%;" value="" required>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<label for="address">Address:</label>
+					<input type="text" name="address" id="address" style="width: 100%;" value="" required>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<label for="tel">Tel:</label>
+					<input type="tel" name="tel" id="tel" style="width: 100%;" value="" pattern="[0-9]{10}" required>
+				</div>
+			</div>
+			<div class="row" style="justify-content: right;">
+				<div class="col">
+					<input type="submit" class="btn btn-primary" value="Buy" style="width: 100%; margin-top: 16px;">
+				</div>
+			</div>
+		</div>
+	</form>
+	{% else%}
+	<p>Empty cart</p>
+	{% endif %}
+</div>
+{% endblock %}

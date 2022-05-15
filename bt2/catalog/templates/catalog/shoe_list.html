@@ -1,0 +1,31 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h3>Shoes</h3>
+<div class="row">
+	{% for i in shoe_list %}
+	<div class="col-sm-3">
+		<div class="card" style="margin-bottom: 16px;">
+			<a href="{{ i.get_absolute_url}}" style="margin: auto;">
+				<img src="{{i.image.url}}" class="card-img-top" alt="{{i.name}}"
+					style="height: 200px; width: auto; margin: auto;">
+			</a>
+			<div class="card-body">
+				<h5 class="text card-title">{{i.name}}</h5>
+				<p class="card-text">{{i.get_price}}</p>
+				<form action="{% url 'add-to-cart' %}" method="post">
+					{% csrf_token %}
+					<input type="hidden" value="{{ i.pk }}" name="pk">
+
+					<button class="btn btn-primary">Buy</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	{% empty %}
+	<div class="col">
+		<p>Not found</p>
+	</div>
+	{% endfor %}
+</div>
+{% endblock %}

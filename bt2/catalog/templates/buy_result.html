@@ -1,0 +1,30 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<h1>Bill</h1>
+{% if error%}
+<p> {{error}} </p>
+{% else %}
+<p><strong>Id:</strong> {{bill.id}} </p>
+<p><strong>Customer:</strong> {{bill.customer}} </p>
+<p><strong>Address:</strong> {{bill.address}} </p>
+<p><strong>Tel:</strong> {{bill.tel}} </p>
+<p><strong>Date:</strong> {{bill.date}} </p>
+<hr>
+{% for i in bill.buyeditem_set.all %}
+<div class="row" style="margin: 8px 0;">
+    <a class="col-3" href="#">
+        <img src="{{i.item.image.url}}" alt="{{i.item.name}}" style="height: 100px; width: auto; display: block; margin: auto;">
+    </a>
+    <div class="col-6">
+        <p> {{i.item.name}} </p>
+        <p> {{i.price}} </p>
+    </div>
+    <div class="col-3">
+        <p>Số lượng</p>
+        <p> {{i.quantity}} </p>
+    </div>
+</div>
+{% endfor %}
+{% endif %}
+{% endblock %}

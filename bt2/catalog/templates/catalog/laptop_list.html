@@ -1,0 +1,31 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h3>Laptops</h3>
+<div class="row">
+	{% for laptop in laptop_list %}
+	<div class="col-sm-3">
+		<div class="card" style="margin-bottom: 16px;">
+			<a href="{{ laptop.get_absolute_url}}" style="margin: auto;">
+				<img src="{{laptop.image.url}}" class="card-img-top" alt="{{laptop.name}}"
+					style="height: 200px; width: auto; margin: auto;">
+			</a>
+			<div class="card-body">
+				<h5 class="text card-title">{{laptop.name}}</h5>
+				<p class="card-text">{{laptop.get_price}}</p>
+				<form action="{% url 'add-to-cart' %}" method="post">
+					{% csrf_token %}
+					<input type="hidden" value="{{ laptop.pk }}" name="pk">
+
+					<button class="btn btn-primary">Buy</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	{% empty %}
+	<div class="col">
+		<p>Not found</p>
+	</div>
+	{% endfor %}
+</div>
+{% endblock %}
